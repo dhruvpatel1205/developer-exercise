@@ -1,18 +1,25 @@
 class Exercise
-
-  # Assume that "str" is a sequence of words separated by spaces.
-  # Return a string in which every word in "str" that exceeds 4 characters is replaced with "marklar".
-  # If the word being replaced has a capital first letter, it should instead be replaced with "Marklar".
+  # Author: Dhruv Patel
+  # Email - dhruvj1205@gmail.com
   def self.marklar(str)
-    # TODO: Implement this method
+    str.gsub(/\b([a-zA-Z]+)(\W*)\b/) do |match|
+      word, punctuation = $1, $2
+      if word.length > 4
+        replacement = word[0] =~ /[A-Z]/ ? "Marklar" : "marklar"
+        "#{replacement}#{punctuation}"
+      else
+        match
+      end
+    end
   end
 
-  # Return the sum of all even numbers in the Fibonacci sequence, up to
-  # the "nth" term in the sequence
-  # eg. the Fibonacci sequence up to 6 terms is (1, 1, 2, 3, 5, 8),
-  # and the sum of its even numbers is (2 + 8) = 10
   def self.even_fibonacci(nth)
-    # TODO: Implement this method
+    return 0 if nth < 1
+    fib =[1,1]
+    while fib.length < nth
+      fib << fib[-1] + fib[-2]
+    end
+    fib.select(&:even?).sum
   end
 
 end
